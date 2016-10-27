@@ -66,7 +66,7 @@ int main(){
 	//Must require O(2*N) to ensure 1 is the relative minima for an increasing sequence
 	//1 O(N) to search length of increasing sequence after 1
 	//1 O(N) to search length of decreasing sequence before 1, which is basically increasing sequence towards the left
-	//The length is absolutely required because it dictates the number at the relative maxima
+	//The length is absolutely required because it dictates the number of stars required at the relative maxima
 	//O(N) is only possible when the relative extrema at the start of a trend is not required, consider Candies in Hackerrank
 	int N;
 	scanf("%d", &N);
