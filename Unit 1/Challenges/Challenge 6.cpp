@@ -1,12 +1,29 @@
 #include <cstdio>
 #include <cstring>
+int readStr(char *str){
+	register char c = getchar();
+	register int len = 0;
+	if(!(~c)) return -1;
+	while(c < 33 && ~c) c = getchar(); //32 if space should be included
+	//32 if stop at space, 10 if stop at next line
+	while(c != 10 && c != 32 && ~c){
+		str[len] = c;
+		c = getchar();
+		len++;
+	}
+	str[len] = '\0';
+	//Just in case if needs to return arriving at end of line
+	//if(c == 10) return 10;
+	return 1;
+}
 int main(){
 	int N;
 	scanf("%d", &N);
+	getchar();
 	//Assume N <= 1000, |str| <= 1000
 	char str[1000][1000];
 	for(int i = 0; i < N; i++)
-		scanf("%s", &str[i]);
+		readStr(str[i]);
 	bool dp[1000][1000];
 	memset(dp[0], 1, sizeof(dp[0]));
 	for(int i = 1; i < N; i++){
