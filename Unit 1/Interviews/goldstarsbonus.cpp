@@ -1,44 +1,11 @@
 #include <cstdio>
-long long mincandy(int *arr, int N){
-	//O(N) solution, for placement in a line
-	//ONLY POSSIBLE BECAUSE WE DON'T NEED TO FIND A RELATIVE EXTREMA AT THE START OF A TREND
-	//The original Candy problem in Hackerrank
-	//This is not dynamic programming
-	int last = arr[0];
-	long long incre = 1, decre = 1, total = 1, high;
-	bool newhigh = false;
-	for(int i = 1; i < N; i++){
-		if(arr[i] > last){
-			//observation: increasing values always have 1 more than previous
-			total += ++incre;
-			//printf("%d ", incre);
-			high = incre;
-			newhigh = true;
-			decre = 0;
-		}else if(arr[i] == last){
-			//observation: middle values always have 1, unless in bonus gold star case
-			total += 1;
-			//printf("1 ");
-			decre = incre = 1;
-			newhigh = false;
-		}else if(arr[i] < last){
-			//observation: increasing addition = decreasing addition, loop through decreasing as increasing = loop backward for decreasing
-			total += ++decre;
-			//printf("%d ", decre);
-			if(newhigh && decre == high){
-				total += 1;
-				++decre;
-				newhigh = false;
-			}
-			incre = 1;
-		}
-		last = arr[i];
-	}
-	return total;
-}
 long long incminstar(int *arr, int N, int start, long long *ans){
 	long long sum = 0;
 	for(int i = start, k = 0; k < N; i = (i+1)%N, k++){
+		if(arr[i] == arr[(i-1+N)%N]){
+			sum += ans[(i-1+N)%N] - ans[i];
+			ans[i] = ans[(i-1+N)%N];
+		}
 		if(arr[i] > arr[(i-1+N)%N]){
 			sum += ans[(i-1+N)%N]+1 - ans[i];
 			ans[i] = ans[(i-1+N)%N]+1;
@@ -49,6 +16,10 @@ long long incminstar(int *arr, int N, int start, long long *ans){
 long long decminstar(int *arr, int N, int start, long long *ans){
 	long long sum = 0;
 	for(int i = start, k = N-1; k >= 0; i = (i-1+N)%N, k--){
+		if(arr[i] == arr[(i+1)%N] && ans[i] < ans[(i+1)%N]){
+			sum += ans[(i+1)%N] - ans[i];
+			ans[i] = ans[(i+1)%N];
+		}
 		if(arr[i] > arr[(i+1)%N] && ans[i] < ans[(i+1)%N] + 1){
 			sum += ans[(i+1)%N]+1 - ans[i];
 			ans[i] = ans[(i+1)%N]+1;

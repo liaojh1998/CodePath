@@ -1,6 +1,8 @@
-#include <cstdio>
+#include <iostream>
+#include <string>
 #include <cstring>
-int substrpal(char* str, int len, char* substr){
+using namespace std;
+int substrpal(string str, int len, string* substr){
 	int substrlen = 0, a, b;
 	bool dp[len][len];
 	memset(dp, 0, sizeof(dp));
@@ -9,6 +11,7 @@ int substrpal(char* str, int len, char* substr){
 		if(i != len-1)
 			dp[i][i+1] = (str[i] == str[i+1]);
 	}
+	//O(N^2)
 	for(int i = len-1; i >= 0; i--){
 		for(int j = i+1; j < len; j++){
 			dp[i][j] = (dp[i][j] || (str[i] == str[j] && dp[i+1][j-1]));
@@ -18,19 +21,18 @@ int substrpal(char* str, int len, char* substr){
 			}
 		}
 	}
-	memcpy(substr, str+a, substrlen+1);
+	*substr = str.substr(a, substrlen);
 	return substrlen;
 }
 int main(){
-	int len;
-	scanf("%d", &len);
-	char str[len];
-	scanf("%s", &str);
+	//Assume |str| <= 100000
+	cin.tie(NULL);
+	ios_base::sync_with_stdio(0);
+	string str;
+	getline(cin, str);
 	//Counts both the amount of palindrome substrings in string
 	//and also finds longest palindrome substring
-	char substr[len];
-	memset(substr, 0, sizeof(substr));
-	int substrlen = substrpal(str, len, substr);
-	printf("%d\n%s\n", substrlen, substr);
+	string substr;
+	cout << substrpal(str, str.size(), &substr) << endl << substr << endl;
 	return 0;
 }

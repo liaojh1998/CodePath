@@ -5,8 +5,9 @@
 using namespace std;
 int main(){
 	//Just to speed things up
-	cin.tie(0);
+	cin.tie(NULL);
 	ios_base::sync_with_stdio(0);
+	//Input
 	string s;
 	getline(cin, s);
 	stringstream ss;
