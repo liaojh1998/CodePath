@@ -12,6 +12,7 @@ void beratostenes(int N){
 	primes.push_back(2);
 	primes.push_back(3);
 	//Sieve of Eratostenes
+	//O(N*sqrt(N)), feasible for 10000000
 	for(int i = 5; i <= N; i++){
 		bool prime = true;
 		int size = primes.size();
