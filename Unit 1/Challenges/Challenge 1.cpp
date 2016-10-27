@@ -4,10 +4,14 @@ int unique(int *arr, int N){
 	int count = 0;
 	for(int i = 0; i < N; i++){
 		arr[count++] = arr[i];
-		for(int j = i+1; j < N && arr[j] == arr[i]; j++, i++);
+		int last = arr[i];
+		for(int j = i+1; j < N && arr[j] == last; j++, i++){
+			last = arr[j];
+			arr[j] = 0;
+		}
+		if(i == N-1 && count != N)
+			arr[N-1] = 0;
 	}
-	for(int i = count; i < N; i++)
-		arr[i] = 0;
 	return count;
 }
 int main(){
