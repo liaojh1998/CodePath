@@ -2,12 +2,13 @@
 #include <vector>
 using namespace std;
 //Solution
-int sum(vector<int> arr){
+int sum(vector<int> numbers){
 	//O(N)
-	//N <= 10^4
-	int s = 0, size = arr.size();
+	//1 <= N <= 10^4
+	//1 <= numbersi <= 10^4
+	int s = 0, size = numbers.size();
 	for(int i = 0; i < size; i++)
-		s += arr[i];
+		s += numbers[i];
 	return s;
 }
 int main(){
