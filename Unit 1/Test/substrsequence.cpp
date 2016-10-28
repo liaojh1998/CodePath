@@ -35,6 +35,6 @@ int main(){
 	//Given a string x and string y, calculate the maximum subsequence of x that's a substring of y
 	string a, b;
 	cin >> a >> b;
-	cout << subseq(a, b) << endl;
+	cout << longestSubsequence(a, b) << endl;
 	return 0;
 }
