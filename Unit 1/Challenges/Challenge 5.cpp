@@ -3,7 +3,7 @@
 #include <cstring>
 using namespace std;
 int substrpal(string str, int len, string* substr){
-	int substrlen = 0, a, b;
+	int substrlen = 0, a;
 	bool dp[len][len];
 	memset(dp, 0, sizeof(dp));
 	for(int i = 0; i < len; i++){
@@ -17,7 +17,7 @@ int substrpal(string str, int len, string* substr){
 			dp[i][j] = (dp[i][j] || (str[i] == str[j] && dp[i+1][j-1]));
 			if(dp[i][j] && (j - i) > substrlen){
 				substrlen = j - i + 1;
-				a = i, b = j;
+				a = i;
 			}
 		}
 	}

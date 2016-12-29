@@ -26,11 +26,11 @@ int maxLength(vector<int> a, int k){
 	//Binary search
 	for(int i = 1; i < size+1; i++){
 		prefix[i] = prefix[i-1] + a[i-1];
-		//printf("%d %d\n", i, search(0, i, i, prefix, (long long)k));
+		//printf("%d %d\n", i, search(0, i, i, prefix, k));
 		maxsubarray = max(maxsubarray, i - search(0, i, i, prefix, k));
 	}
 	/*for(int i = 0; i < size+1; i++)
-		printf("%lld\n", prefix[i]);*/
+		printf("%d\n", prefix[i]);*/
 	return maxsubarray;
 }
 int main(){
